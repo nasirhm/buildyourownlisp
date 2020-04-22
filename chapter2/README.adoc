@@ -1,0 +1,73 @@
+= Chapter 2: Installation
+
+== Testing the Compiler
+To test the C compiler if installed
+[source,shell]
+----
+$ cc --version
+----
+
+== Hello World
+Now that the Compiler is working, Here's our first typical Hello World Program.
+[source,C]
+----
+#include <stdio.h>
+
+int main(int argc, char** argv){
+    puts("Hello, world!");
+    return 0;
+}
+----
+In the first line we include is called a header and let's us call `stdio.h` which 
+allows us to use `puts()` function, which means put string.
+
+After that we define the main function which has a `int` returntype, and takes an
+integer as parameter as `argc` and a `charr**` as `argv` that references to a pointer pointing towards a char.
+
+In the function we, we call `puts()` from stdio which prints `Hello, world!` on the output screen.
+
+In the end it returns 0 as defined while initializing the fuction as `int main`
+
+Now, Let's execute it :
+
+== Compliling & Execution
+
+The `C` file is by default not executable, to execute it you need to compile it into a laguage which your machine 
+understands.
+
+To compile the `hello_world.c` file you would have to run the following on your terminal: 
+[source,shell]
+----
+$ cc -std=c99 -Wall hello_world.c -o hello_world
+----
+
+The `-std=c99` flag is used to tell the compiler about the version of the C lang you would like to use for compiling it,
+the above command generates a executable file hello_world.
+
+To run that :
+[source,shell]
+----
+$ ./hello_world
+----
+in the directory you created the executable file, It prints `Hello, world!` as a Output.
+
+On linux we have `valgrind` or `gdb` to debug `C` code for memory leaks,etc. 
+
+== Bonus Points.
+- Printing something other than "Hello, world!" | bonus_points/hello_nasir.c
+- No main function | Can't compile, error: expected declaration specifiers.
+- Documentation of the `puts()` function. | https://www.tutorialspoint.com/c_standard_library/c_function_puts.htm[Tutorials Point]
+- How to use `gdb` | https://u.osu.edu/cstutorials/2018/09/28/how-to-debug-c-program-using-gdb-in-6-simple-steps/[Debug C Program in 6 Steps]
+
+*Implementing `gdb`* : 
+
+- Created a file to find factorials for
+- using the `-g` flag with `cc`
+- launching gdg on the compiled file.
+- In gdb, setup a breakpoint at a file number by `break line_number`
+** Run the program with `run`, if any additional params are available use `run [args params]`
+*** `c` to continue
+*** `n` to nextline
+*** `s` to step
+- problem found, it assigns the value 0 to a undefined function. 
+** Solved by assigning the value to it.
