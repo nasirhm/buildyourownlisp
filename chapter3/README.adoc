@@ -1,0 +1,153 @@
+= Chapter 3
+
+== Variable 
+Variable in are defined by `int count;`, Declaring it with initializing : `int count = 10`
+
+=== Some Datatypes
+
+- void <- Empty
+- int <- Integer
+- char <- Single character/Byte
+- long <- Integer that can hold larger values
+- float <- Decimal number
+- double <- Decimal number with more persicion
+
+== Functions 
+
+Functions are computation that can perform changes on variables, optionally changes the state of the
+program too. It can take input and perform operations on it and then return a `single variable` as output.
+
+Here's a simple program, that takes 2 int's as an Input and returns an `int` as Output.
+
+[source,c]  
+----
+int add_together(int a, int b){
+    int result = a + b;
+    return result;
+}
+----
+and can be called like `int added_values = add_together(int_a, int_b);` in other functions.
+
+== Structure Definitions
+Structures are a way to define more complex type, they're mostly about different type variable in a single bundled
+package. Here's an example to demonstrate a point in the 2D space. 
+[source,c]
+----
+typedef struct {
+    float x;
+    float y;
+}point
+----
+To perform the above we use the `typedef` keyword with `struct` keyword. To initialize & define it in a function,
+Here's a snippet for it : 
+[source,c]
+----
+point p;
+p.x = 0.1;
+p.y = 10.0;
+
+float length = sqrt(p.x * p.x + p.y * p.y);
+----
+
+== Pointers 
+Pointers are a way to point at a memory location, They're defined by `int*` with a asterik(*).
+
+== Strings
+Strings are defined in C by `char*`
+
+== Conditionals
+- If else: 
+
+[source,c]
+----
+if(x>10 && x<100){
+puts("x is greater than 10 & smaller than 100")
+}else{
+puts("x is lesser than 11 or greater than 100")
+}
+----
+
+== Loops
+- *while loop* : This statement would repeat until the statement becomes false
+
+[source,c]
+----
+int i = 10;
+while (i > 0) {
+  puts("Loop Iteration");
+  i = i - 1;
+}
+----
+- *For loop* : It takes three parameters an `initializer`, then a `condition` and then an `incrementer`. It runs
+until the condition becomes true.
+
+[source,c]
+----
+for (int i = 0; i < 10; i++) {
+  puts("Loop Iteration");
+}
+----
+
+== Bonus Points
+- Use a for loop to print out Hello World! five times.
+- Use a while loop to print out Hello World! five times.
+- Declare a function that outputs Hello World! n number of times. Call this from main.
+- What built in types are there other than the ones listed?
+- What other conditional operators are there other than greater than >, and less than <?
+- What other mathematical operators are there other than add +, and subtract -?
+- What is the += operator, and how does it work?
+- What is the do loop, and how does it work?
+- What is the switch statement and how does it work?
+- What is the break keyword and what does it do?
+- What is the continue keyword and what does it do?
+- What does the typedef keyword do exactly?
+
+=== Data Types in C Language other than ones listed here :
+- `long double`
+- `short int`
+- `unsigned int`
+- `unsigned short int`
+- `long long int`
+- `unsigned long long int`
+- `signed char`
+- `unsigned char`
+- Many More :D
+
+=== Conditional Operators other than `>` and `<`
+- Ternary Operator `(Condition? true_value:false_value)`
+- Greater than equals to `>=`
+- Smaller than equals to `<=`
+- Not equals to `!=`
+- Equals to `==`
+
+=== Arithmatic Operators other than `+` and `-`
+- Multiplication `*`
+- Division `/`
+- Remainder after Division `%`
+
+=== The `+=` Operator 
+The `+=` Operator works same as `<variable_a> = <variable_a> + <variable_b>`
+
+Some Other Operators of this Kind (Assignment Operators) are: 
+
+- `=`
+- `+=`
+- `-=`
+- `*=`
+- `/=`
+- `%=`
+
+=== The `do while` loop
+In the `while` loop it would not execute if the condition is false, where on the other hand in `do while` loop
+the code would execute atleast once. An implementation of it is in the `bonus_points/` directory
+
+=== The `switch` statement, `break` & `continue` Keyword
+In the `switch` statement, we check whether the cases match for a single variable. An Implementation of it is available
+in the `bonus_points/` directory. 
+
+The `break` keyword is used to get the program out of the loop or a statement like `switch`, In loops it breaks them one by one.
+
+The `continue` keyword works somewhat similar to the `break` keyword, rather than terminating, it forces the next iteration of the loop to take place.
+
+=== The `typedef` Keyword 
+By the help of `typedef` keyword you can provide an `alias` to other data types, like we do in a struct.
