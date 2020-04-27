@@ -1,0 +1,69 @@
+= An Interactive Prompt 
+
+== REPL (Read, Evaluate, Print loop)
+
+REPL is a way to constantly take input from the user in the form of an Input and process it and return some Output. Languages
+like `Python` use it as a form of it's Interactive Prompt. In this Chapter, I've written a much simpler version of a REPL.
+
+The source file exists in the same directory as `repl-prompt.c`, Diving Deep into the Code: 
+
+The `static char input[2048]` declares a global char array with the size of 2048. The `static` keyword makes the array local
+to this file. 
+
+In the while loop we create an infinite loop, as 1 is referred as true and rather than using the `puts` function, our program
+is using the `fputs` function. It's a little different `puts` function, the puts append a last line at the end but with fputs, It doesn't.
+It also requires a file to write out to, we provide it `stdout` which displays it on terminal same goes for the fgets and at the
+last line we display the input by appending it to `Hello, You're <input>`
+
+==== Making it Linux/Unix friendly :
+
+While running the program on a linux terminal, by pressing the Arrow Keys(->, <-, ..) it displays some escape sequences, rather than
+moving the cursor. For making it compatible with UNIX/Linux system we would be using the `editline` library.
+
+We will be using `editline/readline.h`. Readline let's us to get input along with navigating with arrowkeys. We're also using the `<stdlib.h>` header file which enables
+us to use the `free` function. We use the `free` function because `readline` unlike `fgets` which writes into some existing buffer
+It allocates a new memory location when it's called.
+
+To compile it, We use : `cc -std=c99 -Wall=linux-repl-prompt.c -ledit -o linux-repl-prompt`
+
+=== The C Preprocessor : 
+
+For a Small project like this, It's ok to build it for a specific platform. But if we would like to make it different platform friendly
+we can take benefit from the C Preprocessor which processes before the Compiler compiling. We use the octothorpe `#` symbol to 
+make use of the Prepressor like we use to import libraries by `#include`. The problem is also known as `Portability`. Another use
+of the preprocessor is to detect which platform the program is being compiled on. 
+
+We can use `#ifdef`, `#else`, `#endif` to take care of the problem mentioned above. The source for this file is: `platform-independent-repl.c`
+
+== Bonus Points : 
+
+- Change the prompt from `lispy> ` to something else.
+- Change what is echoed back to the user.
+- Add an extra message other than `VERSION` & `EXIT` messages.
+- What does `\n` means.
+- What other patterns can be used with `printf`.
+- What happens if you pass `printf`a variable that doesn't match it's format.
+- What does the preprocessor command `#ifndef` do?
+- What does the preprocessor command `#define` do?
+- If `WIN32` is about Windows, What can be used for Linux and OSX ? 
+
+For the first three points in the `bonus_points` directory I've created `prompt_echo_message.c`
+
+- The `\n` is equivalent to a `newline`.
+- Here's a Summary of the available `printf` format specifiers available: 
+** `%s` <- a *string* of characters.
+** `%c` <- a *character*.
+** `%d` <- base-10 *decimal*.
+** `%e` <- exponential *floating* point numbers.
+** `%f` <- *floating* point number.
+** `%i` <- *integer* base-10.
+** `%o` <- *octal* number base-8.
+** `%u` <- *unsigned* interger.
+** `%x` <- *hexa* number base-16.
+** `%%` <- *%* character.
+** `\%` <- *%* character.
+
+- For using a different format, It results in segmentation error and a format warning.
+- The preprocessor command `#ifndef` is used to check whether a token is defined or not by the `#define` preprocessor command.
+- The `#define` preprocessor command is used to define a MACRO, It's used as `#define [MACRONAME] value`.
+- `__UNIX__` for Unix based OS's, `__APPLE__` for OSX & `__linux__` for linux.
