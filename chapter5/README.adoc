@@ -5,12 +5,12 @@ while speaking any language & that's what provides a building block for a langua
 
 In these examples, we're just understanding the concept of how a grammer works in a language.
 
-First in `basic_language_grammer.c` we import a mpc library that provides us the functions that are used later on 
-to define the grammer of the language. 
+First in `basic_language_grammer.c` we import a mpc library that provides us the functions that are used later on
+to define the grammer of the language.
 
 We use a `mpc_parser_t` as a helper function to help us define the datastructure & using `mpc_or` to define a the internals of it.
 
-It's pretty much easier to understand the code, In the second file, we make use of the `mpca_lang` function which 
+It's pretty much easier to understand the code, In the second file, we make use of the `mpca_lang` function which
 under the hood is still using the basic functions defined in the `basic_language_grammer.c` and provides a much UI
 friendly interface for us to define the grammer of our language.
 
@@ -19,3 +19,6 @@ friendly interface for us to define the grammer of our language.
 - Some more examples of the Doge Language in `bonus_points/doge_language.c`
 - The backslashes in the grammer code are used for multi line strings in C.
 - Grammer for decimal numbers are in `bonus_points/decimal.c`
+- For urls like `https://www.abc.com` is in `bonus_points/web_urls.c`
+- For sentences like `cat sat on the mat` is in `bonus_points/cat_sat_on_the_mat.c`
+- for JSON parsing, It's in `bonus_points/json_parsing.c`
