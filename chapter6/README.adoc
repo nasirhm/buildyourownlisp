@@ -1,0 +1,74 @@
+= Chapter 6: Parsing; Polish Notation
+
+In this chapter we used a parser written on top on `mpc` library and integrated it with our LISPY REPL (Read Evaluate Print Loop).
+
+== Polish Notation:
+
+It's a mathematical notation, where the operator comes before the expression. e.g:
+
+* `1 + 2 + 6` becomes `+ 1 2 6`
+* `6 + (2 * 9)` becomes `+ 6 (* 2 9)`
+* `(10 * 2) / (4 + 2)` becomes `/ (* 10 2) (+ 4 2)`
+
+etc.
+
+So textually defining the parser we can say :
+
+* A `number` are one or more characters between `0` to `9` (the `-` side is optional).
+* An `operator` could be any of the following: `+`, `-`, `*`, `/` and in the bonus points `%` would be added too.
+* An `expression` can either be `<number>` or a `(` an `<operator>`, one or more `<expression>` and an `)`.
+* A `program` is the start of input, an `<operator>` one or more `<expressions>` and the end of input.
+
+== Regular Expression:
+
+Defining the parser with every character is a really hard/messy job.
+So, this is where the `regex` comes in, it helps you to write grammers.
+They contain a couple of constructs which we can use while defining our parser.
+They're huge but for this chapter this is what we need:
+
+* `.` Any character is required.
+* `a` The character `a` is required.
+* `[abcdef]` Any character in the `[abcdef]` character set is required.
+* `[a-f]` It has ranges too, Any character in the range `a-f` is required.
+* `a?` The character `a` is optional.
+* `a*` Zero or more of the character `a` is required.
+* `a+` One or more of the character `a` is required.
+* `^` The start of input is required.
+* `$` The end of input is required.
+
+Combining them together to write a regular expression, which can take in numbers. That would be: `/-?[0-9]+/`.
+Which means `-` character would be optional and one or more characters is required from range `[0-9]`.
+We use `/` <- forward slashes to combine different expressions.
+Grammers written by using Regular Expressions can't consist of multiple rules.
+But, it does a great job by matching does the input matches with the provided regular expression.
+
+== Parsing the input:
+
+From the input we get by the REPL, we parse it using the `mpc_parse` function and if it's true.
+We print the AST with `mpc_ast_print`.
+And if it is not we print the error with `mpc_error_print`.
+
+== Some notes.
+
+* For `<editline/readline.h>` to work on fedora, you need to install `libedit-devel` by `dnf install libedit-devel`.
+* In this lispy version, we use `"mpc.h"` instead of `<mpc.h>` while importing, the `<>` <- looks for the file in the systems directory first and the `""` <- looks for it in the current directory.
+* Lispy version 0.0.0.0.2 is released :D.
+
+== Bonus Points:
+
+* Write a Regular Expression to match all the strings with only `a` and `b` for example: `abbaa` or `bbaab`
+** Solved:  `[ab]*`
+* Write a Regular Expression to match all consecutive `a` and `b`, for example `abababa`or `aba`
+** Solved: `aba`
+* Write a Regular expression to match `pit`, `pot` and `respite`.
+** Solved: `(pit|pot|respite)`
+* Change the grammer to add a new operator such as `%`
+** Solved: bonus_points/new_operator.c
+* Change grammer to recognize opearators in textual form as `add`, `sub`, `mul`, `div`.
+** Solved: bonus_points/textual_operators.c
+* Change grammer to recognize decimal numbers.
+** Solved: bonus_points/decimal_numbers.c
+* Change the grammer to write the operators convetionally, between two expressions.
+** Solved: bonus_points/conventionally_operations.c
+* Grammer for `Doge` language.
+** Solved: bonus_points/doge.c
